@@ -6,7 +6,7 @@ simulates mouse wheel scrolling through global keyboard shortcuts and mouse
 gestures, designed as a workaround for a broken mouse scroll wheel.
 
 Modes:
-  Mode 1 (Keyboard): Alt + Up/Down Arrow to scroll
+  Mode 1 (Keyboard): Right Ctrl + Up/Down Arrow to scroll
   Mode 2 (Mouse):    Right-Click held + vertical mouse movement to scroll,
                      or Mouse Button 4/5 to scroll
 
@@ -110,8 +110,8 @@ class KeyboardScrollHandler:
         self._scroll_thread_up = None
         self._scroll_thread_down = None
 
-        # Alt key state
-        self._alt_pressed = False
+        # Right Ctrl key state
+        self._modifier_pressed = False
 
         # Debounce
         self._last_scroll_time = 0
@@ -140,13 +140,13 @@ class KeyboardScrollHandler:
         if self._get_state() != AppState.RUNNING:
             return
 
-        # Track Alt key state
-        if key in (keyboard.Key.alt_l, keyboard.Key.alt_r):
-            self._alt_pressed = True
+        # Track Right Ctrl key state
+        if key == keyboard.Key.ctrl_r:
+            self._modifier_pressed = True
             return
 
-        # Only proceed if Alt is held
-        if not self._alt_pressed:
+        # Only proceed if Right Ctrl is held
+        if not self._modifier_pressed:
             return
 
         if key == keyboard.Key.up:
@@ -156,8 +156,8 @@ class KeyboardScrollHandler:
 
     def _on_release(self, key):
         """Key release event handler."""
-        if key in (keyboard.Key.alt_l, keyboard.Key.alt_r):
-            self._alt_pressed = False
+        if key == keyboard.Key.ctrl_r:
+            self._modifier_pressed = False
             self._stop_all_scrolling()
             return
 
@@ -413,7 +413,7 @@ class TrayManager:
             ),
             pystray.Menu.SEPARATOR,
             pystray.MenuItem(
-                lambda item: "[x] Keyboard Mode (Alt+Arrows)" if ScrollMode.KEYBOARD in self._app.active_modes else "[ ] Keyboard Mode (Alt+Arrows)",
+                lambda item: "[x] Keyboard Mode (RCtrl+Arrows)" if ScrollMode.KEYBOARD in self._app.active_modes else "[ ] Keyboard Mode (RCtrl+Arrows)",
                 self._on_toggle_keyboard
             ),
             pystray.MenuItem(
@@ -540,7 +540,7 @@ class VirtualScrollApp:
         tray manager runs in the main thread.
         """
         print(f"[{APP_NAME}] Starting...")
-        print(f"[{APP_NAME}] Mode 1: Alt + Up/Down Arrow -> Scroll")
+        print(f"[{APP_NAME}] Mode 1: Right Ctrl + Up/Down Arrow -> Scroll")
         print(f"[{APP_NAME}] Mode 2: Right-Click + Drag / Mouse Btn 4/5 -> Scroll")
         print(f"[{APP_NAME}] Running in system tray. Right-click tray icon for options.")
 

@@ -11,8 +11,8 @@ Runs silently in the system tray. Provides scroll simulation through keyboard sh
 ### Mode 1 — Keyboard Scroll
 | Shortcut | Action |
 |----------|--------|
-| `Alt + Up Arrow` | Scroll up |
-| `Alt + Down Arrow` | Scroll down |
+| `Right Ctrl + Up Arrow` | Scroll up |
+| `Right Ctrl + Down Arrow` | Scroll down |
 
 - **Smooth scrolling** when keys are held down
 - Key-repeat flooding protection (debounce)
