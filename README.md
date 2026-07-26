@@ -1,6 +1,6 @@
 # VirtualScroll
 
-**A lightweight Windows desktop utility that simulates mouse wheel scrolling through customizable keyboard shortcuts and mouse gestures as a workaround for a broken scroll wheel.**
+**A lightweight Windows system tray utility with a customizable GUI that simulates mouse wheel scrolling via configurable keyboard shortcuts and mouse gestures — designed as a workaround for a broken scroll wheel.**
 
 Runs silently in the **Windows System Tray** upon startup without cluttering your desktop with windows. Clicking the tray icon opens a modern graphical settings interface (GUI) where you can customize your preferred hotkeys and scroll parameters.
 
