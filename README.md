@@ -1,106 +1,79 @@
 # VirtualScroll
 
-**A lightweight Windows desktop utility that simulates mouse wheel scrolling as a workaround for a broken scroll wheel.**
+**A lightweight Windows desktop utility that simulates mouse wheel scrolling through customizable keyboard shortcuts and mouse gestures as a workaround for a broken scroll wheel.**
 
-Runs silently in the system tray. Provides scroll simulation through keyboard shortcuts and mouse gestures.
+Runs silently in the **Windows System Tray** upon startup without cluttering your desktop with windows. Clicking the tray icon opens a modern graphical settings interface (GUI) where you can customize your preferred hotkeys and scroll parameters.
 
 ---
 
-## Features
+## 🌟 Features
 
-### Mode 1 — Keyboard Scroll
-| Shortcut | Action |
-|----------|--------|
-| `Right Ctrl + Up Arrow` | Scroll up |
-| `Right Ctrl + Down Arrow` | Scroll down |
+### 🖥️ Settings GUI & System Tray Integration
+- **Silent Startup**: Starts directly in the system tray upon launch or Windows boot without interrupting your work.
+- **System Tray Interaction**: Left/double clicking the tray icon or selecting *"Open Settings / GUI"* from the context menu opens the settings window.
+- **Customizable Hotkeys**:
+  - **Modifier Key**: Right Ctrl, Left Ctrl, Right Alt, Left Alt, Right Shift, Left Shift, Either Ctrl/Alt/Shift, or None (Arrow keys only).
+  - **Direction Keys**: Up / Down Arrow Keys, Page Up / Page Down, W / S, I / K.
+- **Scroll Step & Speed**: Customize lines scrolled per trigger (1 - 20 lines).
+- **Persistent Preferences**: Saves all your settings automatically to `config.json`.
+- **Minimize to Tray**: Closing (X) the settings window withdraws it back to the system tray while keeping background scroll simulation active.
 
-- **Smooth scrolling** when keys are held down
-- Key-repeat flooding protection (debounce)
+### ⌨️ Keyboard Scrolling (Mode 1)
+- **Smooth scrolling** when shortcut keys are held down.
+- Built-in debounce protection against key-repeat flooding.
 
-### Mode 2 — Mouse Gesture & Extra Buttons
+### 🖱️ Mouse Gestures & Extra Buttons (Mode 2)
 | Input | Action |
 |-------|--------|
-| **Mouse Button 4** (back) | Scroll up |
-| **Mouse Button 5** (forward) | Scroll down |
-| **Right-Click held + mouse movement** | Scroll (up/down) |
+| **Mouse Button 4** (Back) | Scroll Up |
+| **Mouse Button 5** (Forward) | Scroll Down |
+| **Right-Click held + Vertical Drag** | Directional Scroll |
 
-- Does not interfere with normal right-click usage
-- Gesture threshold prevents accidental triggers
-
-### System Tray
-- Green icon = Active
-- Red icon = Paused
-- Right-click menu: Pause/Resume, Mode toggle, Exit
+- Does not interfere with standard right-click functionality (passes through normally if no mouse movement is detected).
 
 ---
 
-## Installation
+## 🚀 Installation & Usage
 
-### Requirements
+### Prerequisites
 - Python 3.8 or higher
-- Windows 10/11
+- Windows 10 / 11
 
-### Steps
+### Quick Start
 
 ```bash
 # 1. Install dependencies
 pip install -r requirements.txt
 
-# 2. Run the application
+# 2. Run application (starts silently in system tray)
 python virtual_scroll.py
 ```
 
 ---
 
-## Building an Executable
+## 📦 Building Standalone Executable (.exe)
 
-To create a standalone `.exe` file:
+To compile a standalone `.exe` without console windows:
 
 ```bash
-# Using the automated build script
+# Run the automated build script
 build.bat
-
-# Or manually
-pyinstaller --onefile --noconsole --name VirtualScroll virtual_scroll.py
 ```
 
-Output: `dist/VirtualScroll.exe`
+Output: `dist/VirtualScroll_App.exe`
 
 ---
 
-## Adding to Windows Startup
+## 🔄 Adding to Windows Startup
 
 1. Press `Win + R`
 2. Type `shell:startup` and press Enter
-3. Copy `VirtualScroll.exe` into the opened folder
+3. Copy `dist/VirtualScroll_App.exe` (or a shortcut to it) into the opened folder.
 
-The application will start automatically on every system boot.
-
----
-
-## Configuration
-
-You can customize the behavior by editing the constants at the top of `virtual_scroll.py`:
-
-| Constant | Default | Description |
-|----------|---------|-------------|
-| `SCROLL_AMOUNT` | 3 | Lines to scroll per trigger |
-| `SCROLL_INTERVAL` | 0.05s | Repeat interval when key is held |
-| `DEBOUNCE_MS` | 50ms | Flooding protection duration |
-| `GESTURE_THRESHOLD` | 5px | Gesture activation threshold |
-| `GESTURE_SCROLL_RATIO` | 0.4 | Mouse movement to scroll ratio |
+The application will now automatically launch in the background every time Windows boots.
 
 ---
 
-## Technical Details
-
-- **Low resource usage:** ~15-20 MB RAM, negligible CPU
-- **Zero input latency:** pynput listeners run in separate threads
-- **Thread-safe:** All state changes are protected with locks
-- **Graceful shutdown:** All listeners and threads are cleanly stopped on exit
-
----
-
-## License
+## 📄 License
 
 MIT License
